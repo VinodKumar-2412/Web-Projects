@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerConnect - Job Board</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('/api/placeholder/1920/600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .job-card {
+            transition: transform 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .featured-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffd700;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .search-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .apply-modal .modal-content {
+            border-radius: 15px;
+        }
+        
+        .floating-apply {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">CareerConnect</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Companies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Resources</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Sign In</button>
+                    <button class="btn btn-primary">Post a Job</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h1 class="display-4 mb-4">Find Your Dream Job Today</h1>
+                    <p class="lead mb-5">Search through thousands of job listings from top companies</p>
+                    
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <form class="row g-3">
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" placeholder="Job title or keyword">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="Location">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary w-100">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Popular Categories</h2>
+            <div class="row g-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="text-center">
+                        <div class="category-icon mx-auto">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h5>Technology</h5>
+                        <p class="text-muted">1,234 jobs</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="text-center">
+                        <div class="category-icon mx-auto">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5>Finance</h5>
+                        <p class="text-muted">867 jobs</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="text-center">
+                        <div class="category-icon mx-auto">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h5>Design</h5>
+                        <p class="text-muted">577 jobs</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="text-center">
+                        <div class="category-icon mx-auto">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h5>Marketing</h5>
+                        <p class="text-muted">945 jobs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Jobs -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Featured Jobs</h2>
+            <div class="row g-4">
+                <!-- Job Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card job-card h-100">
+                        <span class="featured-tag">Featured</span>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="/api/placeholder/50/50" class="rounded" alt="Company Logo">
+                                <div class="ms-3">
+                                    <h5 class="card-title mb-0">Senior Software Engineer</h5>
+                                    <small class="text-muted">TechCorp Inc.</small>
+                                </div>
+                            </div>
+                            <p class="card-text">Join our dynamic team and work on cutting-edge technologies...</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">Full-time</span>
+                                <span class="text-success">$120k - $150k</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#applyModal">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card job-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="/api/placeholder/50/50" class="rounded" alt="Company Logo">
+                                <div class="ms-3">
+                                    <h5 class="card-title mb-0">UX Designer</h5>
+                                    <small class="text-muted">DesignHub</small>
+                                </div>
+                            </div>
+                            <p class="card-text">Create beautiful and intuitive user experiences for our clients...</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">Remote</span>
+                                <span class="text-success">$90k - $110k</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#applyModal">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Card 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card job-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="/api/placeholder/50/50" class="rounded" alt="Company Logo">
+                                <div class="ms-3">
+                                    <h5 class="card-title mb-0">Marketing Manager</h5>
+                                    <small class="text-muted">GrowthCo</small>
+                                </div>
+                            </div>
+                            <p class="card-text">Lead our marketing initiatives and drive business growth...</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-warning">Hybrid</span>
+                                <span class="text-success">$85k - $100k</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#applyModal">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apply Modal -->
+    <div class="modal fade apply-modal" id="applyModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apply for Position</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Resume</label>
+                                <input type="file" class="form-control" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Cover Letter</label>
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Submit Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Apply Button -->
+    <button class="btn btn-primary floating-apply d-md-none" data-bs-toggle="modal" data-bs-target="#applyModal">
+        Apply Now
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About CareerConnect</h5>
+                    <p>Connecting talented professionals with amazing opportunities worldwide.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">About Us</a></li>
+                        <li><a href="#" class="text-light">Contact</a></li>
+                        <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        <li><a href="#" class="text-light">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe for job alerts and career tips</p>
+                    <form class="d-flex">
+                        <input type="email" class="form-control me-2" placeholder="Enter your email">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
